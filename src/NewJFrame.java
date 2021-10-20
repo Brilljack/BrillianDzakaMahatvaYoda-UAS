@@ -8,6 +8,10 @@
  *
  * @author ASUS
  */
+
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class NewJFrame extends javax.swing.JFrame {
 
     /**
@@ -52,7 +56,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButtonTotall = new javax.swing.JButton();
+        jButtonTotal = new javax.swing.JButton();
         jTextFieldBayar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldUangAkhir = new javax.swing.JTextField();
@@ -136,11 +140,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Pembayaran Setelah Diskon");
 
-        jButtonTotall.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButtonTotall.setText("Total");
-        jButtonTotall.addActionListener(new java.awt.event.ActionListener() {
+        jButtonTotal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonTotal.setText("Total");
+        jButtonTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTotallActionPerformed(evt);
+                jButtonTotalActionPerformed(evt);
             }
         });
 
@@ -178,7 +182,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(569, 569, 569)
-                            .addComponent(jButtonTotall))
+                            .addComponent(jButtonTotal))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
@@ -294,7 +298,7 @@ public class NewJFrame extends javax.swing.JFrame {
                         .addComponent(jTextFieldPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jButtonTotall)
+                    .addComponent(jButtonTotal)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,9 +326,66 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldHargaBarang1ActionPerformed
 
-    private void jButtonTotallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTotallActionPerformed
+    private void jButtonTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTotalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonTotallActionPerformed
+        double jumlahbarang1 = 0, jumlahbarang2 = 0, jumlahbarang3 = 0, byr = 0, hb1, hb2, hb3, diskon = 0.01, total, hargadiskon;
+                hb1 = Double.parseDouble(jTextFieldHargaBarang1.getText());
+                hb2 = Double.parseDouble(jTextFieldHargaBarang2.getText());
+                hb3 = Double.parseDouble(jTextFieldHargaBarang3.getText());
+                try{
+                    jumlahbarang1 = Double.parseDouble(jTextFieldJumlahBarang1.getText());
+                    jumlahbarang2 = Double.parseDouble(jTextFieldJumlahBarang2.getText());
+                    jumlahbarang3 = Double.parseDouble(jTextFieldJumlahBarang3.getText());
+                }
+                catch (Exception error){
+                    showMessageDialog(null, "Tidak Boleh Kosong");
+                }
+                
+                if (jumlahbarang1 >= 50){
+                    total = hb1 * jumlahbarang1 - diskon;
+                    hargadiskon = hb1 * diskon;
+                    jTextFieldTotalHarga1.setText(String.valueOf(total));
+                    jTextFieldHargaBarangDiskon1.setText(String.valueOf(hargadiskon));
+                }else {
+                    total = hb1 * jumlahbarang1;
+                    jTextFieldTotalHarga1.setText(String.valueOf(total));
+                }
+                
+                if (jumlahbarang2 >= 50){
+                    total = hb2 * jumlahbarang1 - diskon;
+                    hargadiskon = hb2 * diskon;
+                    jTextFieldTotalHarga2.setText(String.valueOf(total));
+                    jTextFieldHargaBarangDiskon2.setText(String.valueOf(hargadiskon));
+                }else {
+                    total = hb2 * jumlahbarang2;
+                    jTextFieldTotalHarga2.setText(String.valueOf(total));
+                }
+                
+                if (jumlahbarang3 >= 50){
+                    total = hb3 * jumlahbarang1 - diskon;
+                    hargadiskon = hb3 * diskon;
+                    jTextFieldTotalHarga3.setText(String.valueOf(total));
+                    jTextFieldHargaBarangDiskon3.setText(String.valueOf(hargadiskon));
+                }else {
+                    total = hb3 * jumlahbarang3;
+                    jTextFieldTotalHarga3.setText(String.valueOf(total));
+                }
+                
+                double th1, th2, th3, tp, hasildiskon5 = 0, diskon5 = 0.05, hasildiskon;
+                th1 = Double.parseDouble(jTextFieldTotalHarga1.getText());
+                th2 = Double.parseDouble(jTextFieldTotalHarga2.getText());
+                th3 = Double.parseDouble(jTextFieldTotalHarga3.getText());
+                tp = th1 + th2 + th3;
+                jTextFieldTotalPembayaran.setText(String.valueOf(tp));
+                if(tp >= 1000000){
+                    hasildiskon5 = tp * diskon5;
+                    jTextFieldDiskon.setText(String.valueOf(hasildiskon5));
+                    hasildiskon = tp - hasildiskon5;
+                    jTextFieldPembayaran.setText(String.valueOf(hasildiskon));
+                }else{
+                    jTextFieldPembayaran.setText(String.valueOf(tp));
+                }
+    }//GEN-LAST:event_jButtonTotalActionPerformed
 
     private void jButtonKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKeluarActionPerformed
         // TODO add your handling code here:
@@ -372,7 +433,7 @@ public class NewJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonHapusSemua;
     private javax.swing.JButton jButtonKeluar;
-    private javax.swing.JButton jButtonTotall;
+    private javax.swing.JButton jButtonTotal;
     private javax.swing.JButton jButtonUangAkhir;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
